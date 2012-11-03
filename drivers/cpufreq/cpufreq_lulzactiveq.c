@@ -538,8 +538,10 @@ static void cpufreq_lulzactive_timer(unsigned long data)
 	 * (since last frequency change).
 	 */
 
-	printk (KERN_ERR "LulzQ: cpu %u, load_since_freq_change = %d, load_in_idle = %d\n",
-					data, load_since_change, cpu_load);
+	if (dbs_tuners_ins.dvfs_debug) {
+		printk (KERN_ERR "LulzQ: cpu %u, load_since_freq_change = %d, load_in_idle = %d\n",
+						data, load_since_change, cpu_load);
+	}
 
 	if (load_since_change > cpu_load)
 		cpu_load = load_since_change;
